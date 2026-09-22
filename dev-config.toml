@@ -1,0 +1,24 @@
+theme = "material-ocean"
+yabai = "/opt/homebrew/bin/yabai"
+port = 7778
+mode_file = "~/Library/Caches/uebersicht-simple-bar-index/yabai-mode"
+
+[spaces]
+exclude = ["s16", "sC", "sM", "sV", "sT", "sG", "sB"]
+apps_exclude = ["Wispr Flow"]
+
+[icons]                    # app name (case-insensitive) → "svg:<builtin|path.svg>" or SF Symbol, monochrome
+iTerm2 = "svg:terminal"
+Ghostty = "svg:ghostty"
+Safari = "safari"
+
+[widgets.cpu]
+threshold = 50
+[widgets.memory]
+threshold = 50
+[widgets.netstats]
+threshold = 1500
+[widgets.keyboard]
+max_length = 3
+[widgets.wifi]
+device = "en0"

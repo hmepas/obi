@@ -29,13 +29,6 @@ look and the workflow and replaces the machinery with AppKit and system APIs:
 
 ## What it shows
 
-Left to right:
-
-```
-[s1][s2][s3 >_ 👻][s4 ◎]…[s9]   [bsp][APP_LAUNCH][>_][◎]        [🎤 44%][🔊 69%][📶 SSID][ABC][Wed 23 Sep][01:00]
- spaces                          layout · mode · windows          data widgets
-```
-
 **Spaces.** Every space of every display, filtered by label. Each pill shows the label (or
 index) and one icon per app with windows there; the focused app's icon is brighter. Focused,
 visible and fullscreen states. Click focuses the space, Alt+click renames its label inline.
@@ -180,7 +173,6 @@ scripts/dev-signals.sh remove
 - HTTP is `NWListener` plus a hand-parsed request line. TOML is a strict subset with its own
   parser, but the file is valid TOML.
 
-`ARCH.md` has the full layout and contracts.
 
 ## Not planned
 

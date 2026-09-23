@@ -75,7 +75,7 @@ struct Config {
     var yabaiPath: String { root.string("yabai", "/opt/homebrew/bin/yabai") }
     var port: Int { portOverride ?? root.int("port", 7776) }
     var modeFile: String {
-        (root.string("mode_file", "~/Library/Caches/uebersicht-simple-bar-index/yabai-mode") as NSString).expandingTildeInPath
+        (root.string("mode_file", "~/Library/Caches/obi/mode") as NSString).expandingTildeInPath
     }
     var spacesExclude: [String] { section("spaces").strings("exclude", []) }
     /// Lowercased: app names are matched case-insensitively ("ghostty" hides "Ghostty").

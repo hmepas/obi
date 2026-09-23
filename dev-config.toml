@@ -1,7 +1,7 @@
 theme = "material-ocean"
 yabai = "/opt/homebrew/bin/yabai"
 port = 7778
-mode_file = "~/Library/Caches/uebersicht-simple-bar-index/yabai-mode"
+mode_file = "~/Library/Caches/obi/mode"
 
 [spaces]
 exclude = ["s16", "sC", "sM", "sV", "sT", "sG", "sB"]

@@ -96,7 +96,7 @@ done
 ### Mode badge (Hammerspoon / skhd)
 
 Write `{"mode": "app_launch", "color": "red"}` to the mode file (default
-`~/Library/Caches/uebersicht-simple-bar-index/yabai-mode`). obi watches the file, so the
+`~/Library/Caches/obi/mode`). obi watches the file, so the
 badge updates without any request; `curl localhost:7776/skhd/mode/refresh` also works. An
 empty mode hides the badge. Colors are palette names: `red`, `green`, `yellow`, `orange`,
 `blue`, `magenta`, `cyan`, `white`, `foreground`.
@@ -110,7 +110,7 @@ starts with defaults anyway.
 theme = "material-ocean"
 yabai = "/opt/homebrew/bin/yabai"
 port = 7776
-mode_file = "~/Library/Caches/uebersicht-simple-bar-index/yabai-mode"
+mode_file = "~/Library/Caches/obi/mode"
 
 [spaces]
 exclude = ["s16", "sC", "sM"]        # exact label match

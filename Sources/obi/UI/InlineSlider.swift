@@ -65,7 +65,7 @@ final class InlineSlider: NSView {
     }
 
     override func draw(_ dirtyRect: NSRect) {
-        theme.roles.groupBg.setFill()
+        theme.roles.sliderTrack.setFill()
         NSBezierPath(roundedRect: trackRect, xRadius: trackHeight / 2, yRadius: trackHeight / 2).fill()
         let scale: CGFloat = hoveredKnob || dragging ? 1.5 : 1
         let d = trackHeight * scale

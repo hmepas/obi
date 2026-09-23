@@ -1,4 +1,4 @@
-theme = "material-ocean"
+theme = "pills"
 yabai = "/opt/homebrew/bin/yabai"
 port = 7778
 mode_file = "~/Library/Caches/obi/mode"

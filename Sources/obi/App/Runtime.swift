@@ -60,6 +60,12 @@ final class Runtime {
         widgets.forEach { $0.stop() }
         widgets.removeAll()
 
+        if let panel {
+            panel.height = theme.metrics.barHeight
+            panel.backgroundColor = theme.roles.barBg
+            panel.place()
+        }
+
         let client = YabaiClient(path: config.yabaiPath, shell: shell, log: log)
         let store = YabaiStore(client: client)
         yabai = store

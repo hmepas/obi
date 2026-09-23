@@ -37,9 +37,14 @@ struct Palette {
 struct Roles {
     let text: NSColor
     let mutedText: NSColor
-    let groupBg: NSColor      // background of a widget group (spaces / process / data)
+    let barBg: NSColor        // whole strip; clear = only the groups are painted
+    let groupBg: NSColor      // background of the spaces / process groups
+    let dataGroupBg: NSColor  // background of the data widget group
     let pillBg: NSColor
     let pillText: NSColor
+    let dataText: NSColor
+    let dataIcon: NSColor
+    let timeText: NSColor
     let focusedBg: NSColor
     let focusedText: NSColor
     let fullscreenBg: NSColor
@@ -49,7 +54,10 @@ struct Roles {
     let layoutBadgeText: NSColor
     let badgeText: NSColor
     let danger: NSColor
-    let separator: NSColor
+    let separator: NSColor        // dot between displays in the spaces group
+    let groupSeparator: NSColor?  // vertical hairline between spaces and process groups
+    let dataSeparator: NSColor?   // vertical hairline between data widgets
+    let sliderTrack: NSColor
 }
 
 struct Metrics {

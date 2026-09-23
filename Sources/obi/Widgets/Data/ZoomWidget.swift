@@ -25,7 +25,7 @@ final class ZoomWidget: PollingWidget<ZoomWidget.State> {
 
     override func configure() {
         pill.setSymbol("mic.fill")
-        videoIcon = pill.addSymbol("video.fill")
+        videoIcon = pill.addSymbol("video.fill", color: ctx.theme.roles.dataIcon)
     }
 
     override func fetch() throws -> State {
@@ -43,9 +43,9 @@ final class ZoomWidget: PollingWidget<ZoomWidget.State> {
             pill.isHidden = true
         case .meeting(let micOn, let videoOn):
             pill.setSymbol(micOn ? "mic.fill" : "mic.slash.fill")
-            pill.symbolColor = micOn ? ctx.theme.roles.pillText : ctx.theme.roles.danger
+            pill.symbolColor = micOn ? ctx.theme.roles.dataIcon : ctx.theme.roles.danger
             videoIcon.image = PillView.symbolImage(videoOn ? "video.fill" : "video.slash.fill", size: ctx.theme.metrics.iconSize)
-            videoIcon.contentTintColor = videoOn ? ctx.theme.roles.pillText : ctx.theme.roles.danger
+            videoIcon.contentTintColor = videoOn ? ctx.theme.roles.dataIcon : ctx.theme.roles.danger
             pill.text = ""
             pill.isHidden = false
         }

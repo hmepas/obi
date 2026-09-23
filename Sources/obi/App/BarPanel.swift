@@ -2,7 +2,7 @@ import AppKit
 
 /// Borderless, transparent, non-activating panel pinned to the top of the main display.
 final class BarPanel: NSPanel {
-    private let height: CGFloat
+    var height: CGFloat
     private let offset: CGFloat
 
     init(height: CGFloat, offset: CGFloat) {

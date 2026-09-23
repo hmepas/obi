@@ -133,8 +133,8 @@ final class DataPill: PillView {
     private let label: NSTextField
 
     override init(theme: Theme, paddingH: CGFloat? = nil) {
-        icon = PillView.makeSymbol("circle", size: theme.metrics.iconSize, color: theme.roles.pillText)
-        label = PillView.makeLabel("", theme: theme, color: theme.roles.pillText)
+        icon = PillView.makeSymbol("circle", size: theme.metrics.iconSize, color: theme.roles.dataIcon)
+        label = PillView.makeLabel("", theme: theme, color: theme.roles.dataText)
         super.init(theme: theme, paddingH: paddingH)
         icon.isHidden = true
         stack.addArrangedSubview(icon)
@@ -149,7 +149,7 @@ final class DataPill: PillView {
     }
 
     var textColor: NSColor {
-        get { label.textColor ?? theme.roles.pillText }
+        get { label.textColor ?? theme.roles.dataText }
         set { label.textColor = newValue }
     }
 

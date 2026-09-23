@@ -2,10 +2,12 @@ import Foundation
 
 enum ThemeRegistry {
     static let all: [String: Theme] = [
-        MaterialOcean.theme.name: MaterialOcean.theme,
+        Pills.theme.name: Pills.theme,
+        Band.theme.name: Band.theme,
+        Segmented.theme.name: Segmented.theme,
     ]
 
-    static let defaultName = MaterialOcean.theme.name
+    static let defaultName = Pills.theme.name
 
     static func get(_ name: String) -> Theme? { all[name] }
 }

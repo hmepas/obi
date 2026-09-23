@@ -13,6 +13,8 @@ final class TimeWidget: PollingWidget<String> {
 
     override func fetch() throws -> String { formatter.string(from: Date()) }
 
+    override func configure() { pill.textColor = ctx.theme.roles.timeText }
+
     override func render(_ model: String) {
         pill.text = model
         pill.isHidden = false

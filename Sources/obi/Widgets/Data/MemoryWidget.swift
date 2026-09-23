@@ -21,7 +21,7 @@ final class MemoryWidget: PollingWidget<Int> {
 
     override func render(_ model: Int) {
         pill.text = "\(model)%"
-        pill.textColor = model > 70 ? ctx.theme.roles.danger : ctx.theme.roles.pillText
+        pill.textColor = model > 70 ? ctx.theme.roles.danger : ctx.theme.roles.dataText
         pill.isHidden = model < threshold
     }
 }

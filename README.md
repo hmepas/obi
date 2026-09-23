@@ -101,13 +101,23 @@ badge updates without any request; `curl localhost:7776/skhd/mode/refresh` also 
 empty mode hides the badge. Colors are palette names: `red`, `green`, `yellow`, `orange`,
 `blue`, `magenta`, `cyan`, `white`, `foreground`.
 
+## Themes
+
+One palette (Material Ocean), three shapes. Switch with `theme = ...` in the config or `obi theme <name>` at runtime.
+
+| Theme | Look |
+|---|---|
+| `pills` | simple-bar: transparent 28 px strip, dark rounded groups, a grey pill per item |
+| `band` | native menu bar: black band the full height of the notch strip, system font, text on black; only the focused space / window is highlighted |
+| `segmented` | black band; spaces and the process row are segmented controls, data widgets are text split by hairlines |
+
 ## Configuration
 
 `~/.config/obi/config.toml`. Missing file means defaults; a parse error is logged and the bar
 starts with defaults anyway.
 
 ```toml
-theme = "material-ocean"
+theme = "pills"                    # pills | band | segmented
 yabai = "/opt/homebrew/bin/yabai"
 port = 7776
 mode_file = "~/Library/Caches/obi/mode"
@@ -176,7 +186,7 @@ scripts/dev-signals.sh remove
 
 ## Not planned
 
-Themes beyond Material Ocean, light mode, floating or bottom bars, multiple bars, graphs,
+Palettes beyond Material Ocean, light mode, floating or bottom bars, multiple bars, graphs,
 media / weather / battery / GitHub widgets, a settings UI, plugins, AeroSpace or skhd
 key handling, SIP-enabled setups.
 

@@ -1,13 +1,14 @@
 import Darwin
 import Foundation
 
-/// Used memory % = 100 − kern.memorystatus_level (what `memory_pressure` prints). Text only.
+/// Used memory % = 100 − kern.memorystatus_level (what `memory_pressure` prints).
 final class MemoryWidget: PollingWidget<Int> {
     override var interval: TimeInterval { 4 }
     private var threshold = 50
 
     override func configure() {
         threshold = ctx.config.section("widgets.memory").int("threshold", 50)
+        pill.setSymbol("square.stack.3d.up.fill")
     }
 
     override func fetch() throws -> Int {

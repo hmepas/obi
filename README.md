@@ -70,7 +70,7 @@ hot. Data keeps being collected while a widget is hidden.
 ```sh
 brew tap hmepas/formulae
 brew install obi           # builds from source, needs Xcode
-brew services start obi    # launchd agent homebrew.mxcl.obi, restarts on upgrade
+brew services start obi    # launchd agent sh.brew.obi
 ```
 
 `brew services restart obi` after `brew upgrade obi`. Do not mix with `obi install` below:

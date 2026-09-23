@@ -65,6 +65,19 @@ hot. Data keeps being collected while a widget is hidden.
 
 ## Install
 
+### Homebrew
+
+```sh
+brew tap hmepas/formulae
+brew install obi           # builds from source, needs Xcode
+brew services start obi    # launchd agent homebrew.mxcl.obi, restarts on upgrade
+```
+
+`brew services restart obi` after `brew upgrade obi`. Do not mix with `obi install` below:
+that registers a second agent pointing at a versioned Cellar path.
+
+### From source
+
 ```sh
 git clone https://github.com/hmepas/obi.git && cd obi
 scripts/deploy.sh          # release build → ~/.local/bin/obi → launchd agent com.hmepas.obi
@@ -149,7 +162,7 @@ Reload without restarting: `obi reload`, or `kill -HUP $(pgrep -x obi)`.
 
 ```
 obi [--port N] [--offset PX] [--config PATH]    run the bar (what launchd calls)
-obi install | uninstall                         manage the launchd agent
+obi install | uninstall                         manage the launchd agent (source installs)
 obi reload                                      re-read the config, rebuild widgets
 obi theme <name>                                switch theme at runtime
 obi refresh spaces|windows|displays|mode        poke a refresh

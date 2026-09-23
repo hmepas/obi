@@ -7,9 +7,9 @@ enum Install {
     static var domain: String { "gui/\(getuid())" }
 
     static func install() -> Int32 {
-        let binary = URL(fileURLWithPath: CommandLine.arguments[0]).resolvingSymlinksInPath().path
-        let absolute = binary.hasPrefix("/") ? binary
-            : FileManager.default.currentDirectoryPath + "/" + binary
+        // Not argv[0]: when invoked through PATH it is a bare "obi" and cwd-relative resolution
+        // points launchd at a file that does not exist (EX_CONFIG, agent never starts).
+        let absolute = Bundle.main.executableURL!.resolvingSymlinksInPath().path
         let log = ("~/Library/Logs/obi.log" as NSString).expandingTildeInPath
         let plist = """
         <?xml version="1.0" encoding="UTF-8"?>

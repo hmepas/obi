@@ -9,7 +9,8 @@ final class BarPanel: NSPanel {
         self.height = height
         self.offset = offset
         super.init(contentRect: .zero, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
-        level = .statusBar
+        // Show below the system menu bar so the system menu bar stays usable if necessary 
+        level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.mainMenuWindow)) - 1)
         collectionBehavior = [.canJoinAllSpaces, .stationary, .fullScreenAuxiliary, .ignoresCycle]
         isOpaque = false
         backgroundColor = .clear
@@ -26,6 +27,8 @@ final class BarPanel: NSPanel {
     }
 
     override var canBecomeKey: Bool { true }
+    /// Below the menu-bar level AppKit would push the frame out of the menu bar strip.
+    override func constrainFrameRect(_ frameRect: NSRect, to screen: NSScreen?) -> NSRect { frameRect }
     override var canBecomeMain: Bool { false }
 
     /// Main display = the one carrying the (hidden) system menu bar.

@@ -5,6 +5,7 @@ usage:
   obi [--port N] [--offset PX] [--config PATH]   run the bar + HTTP server
   obi install | uninstall                        manage the launchd agent
   obi reload                                     GET /config/reload
+  obi theme                                      list available themes
   obi theme <name>                               GET /theme/<name>
   obi refresh spaces|windows|displays|mode       GET the matching refresh endpoint
 """
@@ -32,7 +33,10 @@ case "uninstall":
 case "reload":
     exit(Client.get("/config/reload", port: clientPort()))
 case "theme":
-    guard args.count >= 2 else { print(usage); exit(2) }
+    guard args.count >= 2 else {
+        for name in ThemeRegistry.all.keys.sorted() { print(name) }
+        exit(0)
+    }
     exit(Client.get("/theme/\(args[1])", port: clientPort()))
 case "refresh":
     guard args.count >= 2 else { print(usage); exit(2) }

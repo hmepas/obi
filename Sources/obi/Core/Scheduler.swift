@@ -1,6 +1,8 @@
 import Foundation
 
 /// Repeating timers on a utility queue. Blocks run off-main; callers hop to main for rendering.
+/// Deadlines are wall-clock (`DispatchWallTime`): `DispatchTime` is mach_absolute_time, which
+/// stops during sleep, so a minute-aligned timer would wake up misaligned by the sleep duration.
 final class Scheduler {
     final class Token {
         fileprivate let source: DispatchSourceTimer
@@ -18,10 +20,10 @@ final class Scheduler {
         if alignToMinute {
             let now = Date()
             let next = 60 - now.timeIntervalSince1970.truncatingRemainder(dividingBy: 60) + 0.05
-            source.schedule(deadline: .now() + next, repeating: interval, leeway: leeway)
+            source.schedule(wallDeadline: .now() + next, repeating: interval, leeway: leeway)
             queue.async(execute: block)
         } else {
-            source.schedule(deadline: .now(), repeating: interval, leeway: leeway)
+            source.schedule(wallDeadline: .now(), repeating: interval, leeway: leeway)
         }
         source.setEventHandler(handler: block)
         source.resume()

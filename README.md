@@ -47,7 +47,7 @@ focuses the window.
 | memory | used % (red above 70) | below threshold (50 %) | 4 s | |
 | mic | input volume, unfolding slider on hover | | 20 s | drag |
 | sound | output volume, unfolding slider on hover | | 20 s | drag |
-| wifi | SSID | Wi‑Fi off | 20 s | right click → Network settings |
+| wifi | SSID, `max_length` chars then `…`, full name on hover | Wi‑Fi off | 20 s | right click → Network settings |
 | keyboard | layout name, 3 chars | | on change | |
 | date | `Wed 23 Sep` | | 30 s | Calendar |
 | time | `HH:mm` | | minute boundary | |
@@ -154,6 +154,7 @@ threshold = 1500                     # kb/s
 max_length = 3
 [widgets.wifi]
 device = "en0"
+max_length = 12                      # longer SSIDs end in …, hover for the full name
 ```
 
 Reload without restarting: `obi reload`, or `kill -HUP $(pgrep -x obi)`.

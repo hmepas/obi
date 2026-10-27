@@ -2,15 +2,19 @@ import CoreWLAN
 import Foundation
 import SystemConfiguration
 
-/// SSID of the configured interface; hidden when Wi-Fi is off. Right click opens Network settings.
+/// SSID of the configured interface, truncated to `max_length` with the full name as tooltip;
+/// hidden when Wi-Fi is off. Right click opens Network settings.
 /// CoreWLAN and `ipconfig` redact the SSID without Location permission, but the dynamic store's
 /// cached scan record for the interface still carries it.
 final class WifiWidget: PollingWidget<String?> {
     override var interval: TimeInterval { 20 }
     private var device = "en0"
+    private var maxLength = 12
 
     override func configure() {
-        device = ctx.config.section("widgets.wifi").string("device", "en0")
+        let section = ctx.config.section("widgets.wifi")
+        device = section.string("device", "en0")
+        maxLength = section.int("max_length", 12)
         pill.setSymbol("wifi")
         pill.onRightClick = { [weak self] _ in
             self?.ctx.shell.open(url: "x-apple.systempreferences:com.apple.Network-Settings.extension")
@@ -44,7 +48,8 @@ final class WifiWidget: PollingWidget<String?> {
             pill.isHidden = true
             return
         }
-        pill.text = ssid.isEmpty ? "—" : ssid
+        pill.text = ssid.isEmpty ? "—" : ssid.count > maxLength ? String(ssid.prefix(maxLength)) + "…" : ssid
+        pill.toolTip = ssid.isEmpty ? nil : ssid
         pill.isHidden = false
     }
 }

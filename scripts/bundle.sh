@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Wrap a built obi binary into an ad-hoc signed obi.app. Usage: bundle.sh BINARY DEST.app
 # macOS 27.2+ gives the Wi-Fi SSID only to Location-authorized apps, and the authorization prompt
-# is shown for app bundles only. The grant is keyed by bundle id, so it survives rebuilds and
-# moves; the executable must be started by its real path, not through a symlink to it.
+# is shown for app bundles only. The grant is tied to the bundle id and the ad-hoc signature:
+# it survives moving the bundle, but every rebuild prompts once more. The executable must be
+# started by its real path, not through a symlink to it.
 set -euo pipefail
 BIN="$1"
 APP="$2"

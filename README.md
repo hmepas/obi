@@ -94,6 +94,8 @@ Since macOS 27.2 the SSID is only readable by apps with Location access, and mac
 permission prompt for app bundles only. Both install paths therefore run obi from an ad-hoc
 signed `obi.app` (`scripts/bundle.sh`); allow the prompt on first start, or enable obi in
 `System Settings → Privacy & Security → Location Services`. Without it the wifi widget shows `—`.
+The grant is tied to the ad-hoc signature, so macOS asks again after every rebuild or
+`brew upgrade obi`.
 A bare `.build/debug/obi` gets no prompt: bundle it first
 (`scripts/bundle.sh .build/debug/obi .build/obi.app`) and start `.build/obi.app/Contents/MacOS/obi`.
 

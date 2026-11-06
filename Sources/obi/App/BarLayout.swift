@@ -47,6 +47,9 @@ final class BarLayout {
         leading.detachesHiddenViews = true
         leading.translatesAutoresizingMaskIntoConstraints = false
         leading.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        // Too many spaces / windows must clip here, not widen the panel past the screen edge.
+        leading.setClippingResistancePriority(.defaultLow, for: .horizontal)
+        leading.clipsToBounds = true
         root.addSubview(leading)
         root.addSubview(right)
 

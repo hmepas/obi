@@ -11,6 +11,7 @@ let package = Package(
             linkerSettings: [
                 .linkedFramework("AppKit"),
                 .linkedFramework("CoreAudio"),
+                .linkedFramework("CoreLocation"),
                 .linkedFramework("CoreWLAN"),
                 .linkedFramework("Carbon"),
                 .linkedFramework("Network"),

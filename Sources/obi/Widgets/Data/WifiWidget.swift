@@ -1,17 +1,21 @@
+import CoreLocation
 import CoreWLAN
 import Foundation
 import SystemConfiguration
 
 /// SSID of the configured interface, truncated to `max_length` with the full name as tooltip;
 /// hidden when Wi-Fi is off. Right click opens Network settings.
-/// CoreWLAN and `ipconfig` redact the SSID without Location permission, but the dynamic store's
-/// cached scan record for the interface still carries it.
+/// CoreWLAN and `ipconfig` redact the SSID without Location permission. Up to macOS 27.1 the
+/// dynamic store's cached scan record still carried it; 27.2 dropped that, so obi asks for
+/// Location access, which macOS only offers to app bundles (see scripts/bundle.sh).
 final class WifiWidget: PollingWidget<String?> {
     override var interval: TimeInterval { 20 }
     private var device = "en0"
     private var maxLength = 12
+    private let location = CLLocationManager()
 
     override func configure() {
+        if Bundle.main.bundleIdentifier != nil { location.requestWhenInUseAuthorization() }
         let section = ctx.config.section("widgets.wifi")
         device = section.string("device", "en0")
         maxLength = section.int("max_length", 12)

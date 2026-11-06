@@ -80,13 +80,22 @@ that registers a second agent pointing at a versioned Cellar path.
 
 ```sh
 git clone https://github.com/hmepas/obi.git && cd obi
-scripts/deploy.sh          # release build → ~/.local/bin/obi → launchd agent com.hmepas.obi
+scripts/deploy.sh          # release build → ~/Applications/obi.app → launchd agent com.hmepas.obi
 ```
 
 `obi install` writes `~/Library/LaunchAgents/com.hmepas.obi.plist` and bootstraps it;
 `obi uninstall` removes it. Both are idempotent. Re-run `scripts/deploy.sh` after every
-change: it replaces the binary by rename, which matters because overwriting a running
+change: it recreates the bundle, which matters because overwriting a running
 executable in place makes macOS kill the next launch.
+
+### Wi‑Fi name and Location access
+
+Since macOS 27.2 the SSID is only readable by apps with Location access, and macOS shows the
+permission prompt for app bundles only. Both install paths therefore run obi from an ad-hoc
+signed `obi.app` (`scripts/bundle.sh`); allow the prompt on first start, or enable obi in
+`System Settings → Privacy & Security → Location Services`. Without it the wifi widget shows `—`.
+A bare `.build/debug/obi` gets no prompt: bundle it first
+(`scripts/bundle.sh .build/debug/obi .build/obi.app`) and start `.build/obi.app/Contents/MacOS/obi`.
 
 ### yabai signals
 

@@ -48,7 +48,7 @@ focuses the window.
 | mic | input volume, unfolding slider on hover | | 20 s | drag |
 | sound | output volume, unfolding slider on hover | | 20 s | drag |
 | wifi | SSID, `max_length` chars then `…`, full name on hover | Wi‑Fi off | 20 s | right click → Network settings |
-| keyboard | layout name, 3 chars | | on change | |
+| keyboard | layout name, 3 chars | | on change | next layout |
 | date | `Wed 23 Sep` | | 30 s | Calendar |
 | time | `HH:mm` | | minute boundary | |
 

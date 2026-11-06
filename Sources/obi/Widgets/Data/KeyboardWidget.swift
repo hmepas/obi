@@ -16,6 +16,7 @@ final class KeyboardWidget: Widget {
     func start(_ ctx: Context) {
         self.ctx = ctx
         maxLength = ctx.config.section("widgets.keyboard").int("max_length", 3)
+        pill.onClick = { _ in Self.selectNext() }
         let name = Notification.Name(kTISNotifySelectedKeyboardInputSourceChanged as String)
         observer = DistributedNotificationCenter.default().addObserver(forName: name, object: nil, queue: .main) { [weak self] _ in
             // TIS may lag the notification by a moment.
@@ -33,6 +34,19 @@ final class KeyboardWidget: Widget {
         let name = Self.currentName()
         pill.text = String(name.prefix(maxLength))
         pill.isHidden = name.isEmpty
+    }
+
+    /// Cycles through the enabled keyboard layouts, in System Settings order.
+    static func selectNext() {
+        let filter = [
+            kTISPropertyInputSourceCategory: kTISCategoryKeyboardInputSource as Any,
+            kTISPropertyInputSourceIsSelectCapable: true,
+        ] as CFDictionary
+        guard let sources = TISCreateInputSourceList(filter, false)?.takeRetainedValue() as? [TISInputSource],
+              sources.count > 1,
+              let current = TISCopyCurrentKeyboardInputSource()?.takeRetainedValue() else { return }
+        let index = sources.firstIndex { CFEqual($0, current) } ?? -1
+        TISSelectInputSource(sources[(index + 1) % sources.count])
     }
 
     static func currentName() -> String {

@@ -9,10 +9,7 @@ final class BarPanel: NSPanel {
         self.height = height
         self.offset = offset
         super.init(contentRect: .zero, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
-        // Above the menu bar: since macOS 27.2 MenuBarAgent keeps a transparent window one level
-        // above the (hidden) menu bar across the whole strip, and a click reaching it unhides the
-        // menu bar. Below that level every click on a pill pulled the system menu bar down.
-        level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.mainMenuWindow)) + 2)
+        level = Self.aboveMenuBar
         collectionBehavior = [.canJoinAllSpaces, .stationary, .fullScreenAuxiliary, .ignoresCycle]
         isOpaque = false
         backgroundColor = .clear
@@ -26,6 +23,31 @@ final class BarPanel: NSPanel {
         animationBehavior = .none
         titleVisibility = .hidden
         appearance = NSAppearance(named: .darkAqua)
+    }
+
+    /// Since macOS 27.2 MenuBarAgent keeps a transparent window one level above the (hidden)
+    /// menu bar across the whole strip, and a click reaching it slides the menu bar out. The bar
+    /// normally sits above that window so clicks stay on the pills; while the system menu bar is
+    /// shown (pointer at the top edge) it drops below it so the menu bar stays usable.
+    private static let aboveMenuBar = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.mainMenuWindow)) + 2)
+    private static let belowMenuBar = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.mainMenuWindow)) - 1)
+    private var menuBarTimer: Timer?
+
+    func trackSystemMenuBar() {
+        menuBarTimer?.invalidate()
+        menuBarTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { [weak self] _ in
+            guard let self, let screen = NSScreen.screens.first else { return }
+            let pointerInStrip = NSEvent.mouseLocation.y >= screen.frame.maxY - 40
+            guard pointerInStrip || self.level == Self.belowMenuBar else { return }
+            let shown = Self.systemMenuBarShown()
+            let wanted = shown ? Self.belowMenuBar : Self.aboveMenuBar
+            if self.level != wanted { self.level = wanted }
+        }
+    }
+
+    private static func systemMenuBarShown() -> Bool {
+        guard let list = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [[String: Any]] else { return false }
+        return list.contains { $0[kCGWindowName as String] as? String == "Menubar" && $0[kCGWindowOwnerName as String] as? String == "Window Server" }
     }
 
     override var canBecomeKey: Bool { true }

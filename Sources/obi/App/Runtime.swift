@@ -40,6 +40,7 @@ final class Runtime {
         panel.contentView = layout.root
         panel.place()
         panel.orderFrontRegardless()
+        panel.trackSystemMenuBar()
         self.panel = panel
         NotificationCenter.default.addObserver(
             forName: NSApplication.didChangeScreenParametersNotification, object: nil, queue: .main

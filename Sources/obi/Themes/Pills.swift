@@ -1,6 +1,6 @@
 import AppKit
 
-/// simple-bar's look: a transparent 28 px strip, dark rounded groups, a grey pill per item.
+/// simple-bar's look: a transparent 35 pt strip (pills centred between the screen edge and the windows), dark rounded groups, a grey pill per item.
 enum Pills {
     static let theme: Theme = {
         let p = MaterialOcean.palette
@@ -34,13 +34,13 @@ enum Pills {
             ),
             font: Theme.monoFont(size: 12),
             metrics: Metrics(
-                barHeight: 28,
-                groupHeight: 28,
-                groupRadius: 14,
+                barHeight: 35,
+                groupHeight: 35,
+                groupRadius: 17.5,
                 groupPaddingH: 5,
                 groupGap: 4,
-                pillHeight: 20,
-                pillRadius: 10,
+                pillHeight: 25,
+                pillRadius: 12.5,
                 pillPaddingH: 7,
                 spacePaddingH: 9,
                 gap: 5,

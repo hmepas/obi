@@ -3,7 +3,7 @@
 **SketchyBar for yabai. Inspired by simple-bar.**
 
 A native, opinionated macOS status bar for [yabai](https://github.com/koekeishiya/yabai):
-one 28 px strip over the hidden system menu bar, spaces with app icons, the focused
+one 35 pt strip over the hidden system menu bar, spaces with app icons, the focused
 space's windows, and a fixed row of data widgets that only show up when something is
 worth looking at. One Swift binary, no Electron, no WebView, no Node, no polling scripts.
 
@@ -131,7 +131,7 @@ One palette (Material Ocean), three shapes. Switch with `theme = ...` in the con
 
 | Theme | Look |
 |---|---|
-| `pills` | simple-bar: transparent 28 px strip, dark rounded groups, a grey pill per item |
+| `pills` | simple-bar: transparent 35 pt strip, dark rounded groups, a grey pill per item |
 | `band` | native menu bar: black band the full height of the notch strip, system font, text on black; only the focused space / window is highlighted |
 | `segmented` | black band; spaces and the process row are segmented controls, data widgets are text split by hairlines |
 

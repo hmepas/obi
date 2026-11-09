@@ -9,8 +9,10 @@ final class BarPanel: NSPanel {
         self.height = height
         self.offset = offset
         super.init(contentRect: .zero, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
-        // Show below the system menu bar so the system menu bar stays usable if necessary 
-        level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.mainMenuWindow)) - 1)
+        // Above the menu bar: since macOS 27.2 MenuBarAgent keeps a transparent window one level
+        // above the (hidden) menu bar across the whole strip, and a click reaching it unhides the
+        // menu bar. Below that level every click on a pill pulled the system menu bar down.
+        level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.mainMenuWindow)) + 2)
         collectionBehavior = [.canJoinAllSpaces, .stationary, .fullScreenAuxiliary, .ignoresCycle]
         isOpaque = false
         backgroundColor = .clear

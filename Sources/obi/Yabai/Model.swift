@@ -43,9 +43,10 @@ struct Window: Decodable, Equatable {
     let isHidden: Bool
     let isSticky: Bool
     let isNativeFullscreen: Bool
+    let layer: String
 
     enum CodingKeys: String, CodingKey {
-        case id, pid, app, title, role, subrole, frame, display, space
+        case id, pid, app, title, role, subrole, frame, display, space, layer
         case stackIndex = "stack-index"
         case hasFocus = "has-focus"
         case isVisible = "is-visible"
@@ -73,7 +74,9 @@ struct Display: Decodable, Equatable {
 extension Window {
     /// Panels and quick terminals (Ghostty cmd+/) are AXFloatingWindow: not real app windows.
     /// yabai also lists tooltips (role AXHelpTag) that can outlive the tooltip itself.
-    var isPanel: Bool { role != "AXWindow" || subrole == "AXFloatingWindow" }
+    /// Layer "unknown" = non-standard window level (overlays, menus, e.g. Telegram's hidden
+    /// "Media viewer" at level 101); user-set "above"/"below" windows are kept.
+    var isPanel: Bool { role != "AXWindow" || subrole == "AXFloatingWindow" || layer == "unknown" }
 }
 
 struct Snapshot: Equatable {
